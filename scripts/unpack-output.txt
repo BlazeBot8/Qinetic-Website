@@ -1,0 +1,102 @@
+﻿Template length: 55098
+Manifest entries: 13
+Ext resources: 0
+
+--- Text content ---
+
+QINETIC
+What
+About
+Apply
+Contact
+Join
+Apply Now
+Remote-first research lab
+Computing at the edge of the quantum frontier
+Where quantum information meets machine intelligence. We build the models, methods, and infrastructure for computation's next era.
+See our work
+Scroll
+[ 01 ] &nbsp;What we do
+Research across the quantumΓÇôML boundary
+Quantum algorithms
+Designing and analyzing algorithms that exploit quantum advantage for real problems.
+Machine intelligence
+Learning methods that scale ΓÇö from representation to reasoning under uncertainty.
+Hybrid systems
+Bridging classical and quantum compute into pipelines that ship and reproduce.
+[ 02 ] &nbsp;About us
+A small lab with an outsized ambition
+We're a distributed team of researchers and engineers pushing on the hardest questions in computation ΓÇö organized around curiosity, open output, and deep focus rather than geography.
+Founded
+Researchers
+Time zones
+A. Mercer
+K. Osei
+ML systems
+L. Faro
+Theory
+M. Reyes
+Infrastructure
+[ 03 ] &nbsp;Apply
+Join the next cohort
+Applications open on a rolling basis. If you think about hard problems for fun, we should talk.
+Quantum information
+Deep learning
+Numerical methods
+Distributed systems
+Open source
+Start application
+[ 04 ] &nbsp;Contact
+Let's talk
+Γ£ë &nbsp;Email
+┬⌐ 2026 Qinetic Labs
+w + 20) p.x = -20; if (p.y
+h + 20) p.y = -20; const py = p.y - par; for (let j = i + 1; j
+
+--- IDs ---
+top, what, about, apply, contact
+
+--- Inline style blocks ---
+Style block count: 2
+
+Style 1 (16423 chars), preview:
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/89f1ed4e-2e2c-4cba-825f-30999adcc48a.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/b38a5c7c-34fe-4e03-8100-ac990b132db0.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/1200d4b4-710e-4706-98ba-96d8cae0dd85.woff2") format('woff2');
+  unicode-range
+
+Style 2 (1049 chars), preview:
+* { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: #0A0612; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  ::selection { background: rgba(192,38,211,0.35); color: #fff; }
+  @keyframes qFloatA { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(6%,-5%) scale(1.08); } }
+  @keyframes qFloatB { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-7%,6%) scale(1.12); } }
+  @keyframes qFloatC { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(5%,7%) scale(0.94); } }
+  @keyframes qPulse { 0%,100% { opacity: .5; } 50% { opacity: .9; } }
+  @keyframes qReveal { from { opacity: 0; transform: translateY(26px); } to { opac
+
+--- Script src ---
+assets/57ca11f0-0e6f-444a-aa5e-0bdc9ff0bfd2.js
