@@ -31,7 +31,7 @@ export default function ContactEmailPage() {
     if (!isEmailJsConfigured()) {
       setStatus("error");
       setError(
-        "EmailJS is not configured. Run: npm run setup:email — then restart the dev server."
+        "Email could not be sent. Check your connection and try again, or reach out via LinkedIn or GitHub."
       );
       return;
     }
