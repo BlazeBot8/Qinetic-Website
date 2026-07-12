@@ -1,18 +1,30 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { navLinks } from "../data/navLinks";
 import { useActiveSection } from "../hooks/useActiveSection";
+import { scrollToSection } from "../lib/scrollToSection";
 import { Wordmark } from "./Brand";
 
 const sectionIds = navLinks.map((link) => link.id);
 const MOBILE_BREAKPOINT = 860;
 
 export default function Nav({ logoRef, logoHidden = false }) {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const activeId = useActiveSection(sectionIds);
+
+  const goToSection = (id, onNavigate) => {
+    onNavigate?.();
+    if (location.pathname === "/") {
+      scrollToSection(id);
+      return;
+    }
+    navigate(`/#${id}`);
+  };
 
   useEffect(() => {
     const mq = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`);
@@ -64,9 +76,13 @@ export default function Nav({ logoRef, logoHidden = false }) {
             {navLinks
               .filter((link) => link.id !== "apply")
               .map((link) => (
-              <Link
+              <a
                 key={link.id}
-                to={`/#${link.id}`}
+                href={`/#${link.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  goToSection(link.id);
+                }}
                 className={`font-display text-[0.8125rem] font-medium uppercase tracking-[0.18em] no-underline transition-colors duration-250 px-0.5 py-1.5 ${
                   activeId === link.id
                     ? "text-white shadow-[inset_0_-2px_0_#C026D3]"
@@ -74,11 +90,18 @@ export default function Nav({ logoRef, logoHidden = false }) {
                 }`}
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
-            <Link to="/#apply" className="btn-nav-join">
+            <a
+              href="/#apply"
+              onClick={(e) => {
+                e.preventDefault();
+                goToSection("apply");
+              }}
+              className="btn-nav-join"
+            >
               Apply
-            </Link>
+            </a>
           </div>
         )}
 
@@ -121,24 +144,30 @@ export default function Nav({ logoRef, logoHidden = false }) {
 
             <nav className="mt-11 flex flex-col gap-0.5">
               {navLinks.map((link) => (
-                <Link
+                <a
                   key={link.id}
-                  to={`/#${link.id}`}
-                  onClick={closeMenu}
+                  href={`/#${link.id}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    goToSection(link.id, closeMenu);
+                  }}
                   className="border-b border-violet-glow/10 px-1 py-4 font-display text-[1.625rem] font-bold uppercase tracking-[0.04em] text-fg no-underline"
                 >
                   {link.label}
-                </Link>
+                </a>
               ))}
             </nav>
 
-            <Link
-              to="/#apply"
-              onClick={closeMenu}
+            <a
+              href="/#apply"
+              onClick={(e) => {
+                e.preventDefault();
+                goToSection("apply", closeMenu);
+              }}
               className="btn-primary mt-auto justify-center py-[1.0625rem] text-[0.9375rem] tracking-[0.12em]"
             >
               Apply Now
-            </Link>
+            </a>
           </motion.div>
         )}
       </AnimatePresence>

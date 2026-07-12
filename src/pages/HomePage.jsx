@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Atmosphere from "../components/Atmosphere";
+import { scrollToSection } from "../lib/scrollToSection";
 import Nav from "../components/Nav";
 import Hero from "../components/Hero";
 import WhatSection from "../components/WhatSection";
@@ -11,17 +13,17 @@ import Footer from "../components/Footer";
 import QuantumIntro from "../components/QuantumIntro";
 
 export default function HomePage() {
+  const location = useLocation();
   const logoRef = useRef(null);
   const [intro, setIntro] = useState(true);
 
   useEffect(() => {
-    const hash = window.location.hash;
-    if (!hash) return;
-    const id = setTimeout(() => {
-      document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
-    return () => clearTimeout(id);
-  }, []);
+    const id = location.hash.replace("#", "");
+    if (!id) return;
+
+    const timer = setTimeout(() => scrollToSection(id), 150);
+    return () => clearTimeout(timer);
+  }, [location.hash]);
 
   return (
     <div className="relative min-h-screen bg-void text-fg">
