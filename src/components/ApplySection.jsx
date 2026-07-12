@@ -1,13 +1,8 @@
 import { Arrow } from "./Brand";
 import { Reveal } from "./Reveal";
 
-const tags = [
-  "Quantum information",
-  "Deep learning",
-  "Numerical methods",
-  "Distributed systems",
-  "Open source",
-];
+const APPLY_URL =
+  "https://docs.google.com/forms/d/1790NuQ97WA_slRFkkfWctGd9DFmjRInpwVE3S3S5cQM/edit";
 
 export default function ApplySection() {
   return (
@@ -20,7 +15,7 @@ export default function ApplySection() {
           <div className="pointer-events-none absolute left-1/2 top-[-40%] h-[120%] w-[70%] -translate-x-1/2 bg-[radial-gradient(circle,rgba(192,38,211,0.35),transparent_65%)] blur-[50px]" />
 
           <div className="relative">
-            <p className="section-index mb-5 text-[#d8b4fe]">[ 03 ]&nbsp;Apply</p>
+            <p className="section-index mb-5 text-[#d8b4fe]">[ 04 ]&nbsp;Apply</p>
             <h2 className="mx-auto max-w-[20ch] font-display text-[clamp(1.75rem,4.8vw,3.375rem)] font-extrabold uppercase leading-[1.04] tracking-[-0.02em] text-[#fbf9ff]">
               Join the next cohort
             </h2>
@@ -29,16 +24,17 @@ export default function ApplySection() {
               problems for fun, we should talk.
             </p>
 
-            <div className="mt-8 flex flex-wrap justify-center gap-2.5">
-              {tags.map((tag) => (
-                <span key={tag} className="chip">
-                  {tag}
-                </span>
-              ))}
-            </div>
+            <p className="mx-auto mt-6 font-display text-[0.8125rem] uppercase tracking-[0.14em] text-[#a79fbd]">
+              Cohort 1 acceptance rate:{" "}
+              <span className="text-gradient-stat text-[1.125rem] font-extrabold tracking-[-0.02em]">
+                18%
+              </span>
+            </p>
 
             <a
-              href="#contact"
+              href={APPLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-primary mt-9 px-9 py-[1.0625rem] text-[0.90625rem]"
             >
               Start application <Arrow />

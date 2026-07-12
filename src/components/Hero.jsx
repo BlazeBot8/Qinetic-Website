@@ -12,14 +12,14 @@ export default function Hero() {
         <div className="hero-badge mb-8">
           <span className="h-[7px] w-[7px] animate-q-pulse rounded-full bg-magenta shadow-[0_0_10px_#C026D3]" />
           <span className="font-display text-[0.71875rem] uppercase tracking-[0.24em] text-violet-soft">
-            Remote-first research lab
+            Research-first QML research lab
           </span>
         </div>
       </Reveal>
 
       <Reveal delay={0.08}>
         <h1 className="text-gradient mx-auto max-w-[18ch] font-display text-[clamp(2.125rem,6.4vw,5rem)] font-extrabold uppercase leading-[1.02] tracking-[-0.02em] text-balance">
-          Computing at the edge of the quantum frontier
+          Researching at the edge of the quantum frontier
         </h1>
       </Reveal>
 
@@ -31,12 +31,9 @@ export default function Hero() {
       </Reveal>
 
       <Reveal delay={0.24}>
-        <div className="mt-[2.625rem] flex flex-wrap items-center justify-center gap-3.5">
+        <div className="mt-[2.625rem] flex justify-center">
           <a href="#apply" className="btn-primary">
             Apply Now <Arrow />
-          </a>
-          <a href="#what" className="btn-ghost">
-            See our work
           </a>
         </div>
       </Reveal>

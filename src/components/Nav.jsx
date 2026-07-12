@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { navLinks } from "../data/navLinks";
 import { useActiveSection } from "../hooks/useActiveSection";
-import { Arrow, Wordmark } from "./Brand";
+import { Wordmark } from "./Brand";
 
 const sectionIds = navLinks.map((link) => link.id);
 const MOBILE_BREAKPOINT = 860;
@@ -49,21 +50,23 @@ export default function Nav({ logoRef, logoHidden = false }) {
             : "border-b border-transparent bg-transparent"
         }`}
       >
-        <a
+        <Link
           ref={logoRef}
-          href="#top"
+          to="/"
           className="text-white no-underline"
           style={{ opacity: logoHidden ? 0 : 1 }}
         >
           <Wordmark />
-        </a>
+        </Link>
 
         {!isMobile && (
           <div className="flex items-center gap-[clamp(0.375rem,1.6vw,1.375rem)]">
-            {navLinks.map((link) => (
-              <a
+            {navLinks
+              .filter((link) => link.id !== "apply")
+              .map((link) => (
+              <Link
                 key={link.id}
-                href={`#${link.id}`}
+                to={`/#${link.id}`}
                 className={`font-display text-[0.8125rem] font-medium uppercase tracking-[0.18em] no-underline transition-colors duration-250 px-0.5 py-1.5 ${
                   activeId === link.id
                     ? "text-white shadow-[inset_0_-2px_0_#C026D3]"
@@ -71,11 +74,11 @@ export default function Nav({ logoRef, logoHidden = false }) {
                 }`}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
-            <a href="#apply" className="btn-nav-join">
-              Join <Arrow />
-            </a>
+            <Link to="/#apply" className="btn-nav-join">
+              Apply
+            </Link>
           </div>
         )}
 
@@ -118,24 +121,24 @@ export default function Nav({ logoRef, logoHidden = false }) {
 
             <nav className="mt-11 flex flex-col gap-0.5">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.id}
-                  href={`#${link.id}`}
+                  to={`/#${link.id}`}
                   onClick={closeMenu}
                   className="border-b border-violet-glow/10 px-1 py-4 font-display text-[1.625rem] font-bold uppercase tracking-[0.04em] text-fg no-underline"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </nav>
 
-            <a
-              href="#apply"
+            <Link
+              to="/#apply"
               onClick={closeMenu}
               className="btn-primary mt-auto justify-center py-[1.0625rem] text-[0.9375rem] tracking-[0.12em]"
             >
               Apply Now
-            </a>
+            </Link>
           </motion.div>
         )}
       </AnimatePresence>

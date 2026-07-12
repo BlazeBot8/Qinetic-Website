@@ -265,6 +265,7 @@
     border: 1px solid rgba(168, 130, 255, 0.24);
     background: rgba(255, 255, 255, 0.03);
     cursor: pointer;
+    text-decoration: none;
     transition: border-color 0.3s ease, background 0.3s ease;
   }
 
@@ -305,6 +306,50 @@
     background: rgba(168, 130, 255, 0.05);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: left;
+  }
+
+  .form-label {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-violet-soft);
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(168, 130, 255, 0.22);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .form-input::placeholder {
+    color: var(--color-fg-faint);
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: rgba(192, 38, 211, 0.55);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 9rem;
   }
 
   .noise-overlay {
