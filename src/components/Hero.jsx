@@ -12,7 +12,7 @@ export default function Hero() {
         <div className="hero-badge mb-8">
           <span className="h-[7px] w-[7px] animate-q-pulse rounded-full bg-magenta shadow-[0_0_10px_#C026D3]" />
           <span className="font-display text-[0.71875rem] uppercase tracking-[0.24em] text-violet-soft">
-            Research-first QML research lab
+            Remote QML research lab
           </span>
         </div>
       </Reveal>
