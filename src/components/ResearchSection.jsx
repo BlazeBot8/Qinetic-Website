@@ -1,4 +1,5 @@
 import { Reveal, RevealGroup, RevealItem } from "./Reveal";
+import { Parallax } from "./Parallax";
 
 const projects = [
   {
@@ -32,45 +33,41 @@ export default function ResearchSection() {
   return (
     <section
       id="research"
-      className="relative z-10 mx-auto max-w-[1200px] px-[clamp(1.25rem,5vw,3rem)] py-[clamp(3.125rem,8vw,6.875rem)]"
+      className="relative z-10 mx-auto max-w-[1200px] border-t border-violet-glow/10 px-[clamp(1.25rem,5vw,3rem)] py-[clamp(2.75rem,6vw,5rem)]"
     >
-      <div className="max-w-[720px]">
+      <Parallax distance={34} className="max-w-[720px]">
         <Reveal>
-          <p className="section-index mb-5">[ 03 ]&nbsp;Research</p>
+          <p className="section-index mb-5">Research</p>
         </Reveal>
         <Reveal delay={0.08}>
-          <h2 className="font-display text-[clamp(1.75rem,4.4vw,3.125rem)] font-bold leading-[1.05] tracking-[-0.02em] text-fg-hi">
-            Active lines of inquiry
+          <h2 className="font-serif text-[clamp(1.875rem,4.4vw,3.125rem)] font-normal leading-[1.1] tracking-[-0.02em] text-fg-hi">
+            What we are working on
           </h2>
         </Reveal>
-      </div>
+      </Parallax>
 
-      <RevealGroup className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
-        {projects.map((project, i) => (
-          <RevealItem
-            key={project.title}
-            className={
-              i < 3
-                ? "lg:col-span-2"
-                : i === 3
-                  ? "lg:col-span-2 lg:col-start-2"
-                  : "lg:col-span-2 lg:col-start-4"
-            }
-          >
-            <article className="card-feature h-full">
-              <p className="mb-2.5 font-display text-[0.6875rem] tracking-[0.2em] text-fg-faint">
-                {String(i + 1).padStart(2, "0")}
-              </p>
-              <h3 className="mb-3 font-display text-[1.0625rem] font-bold leading-snug tracking-[-0.01em] text-fg-hi">
-                {project.title}
-              </h3>
-              <p className="text-[0.875rem] leading-relaxed text-[#9c93b4]">
+      <Reveal delay={0.12}>
+        <span className="section-rule mt-[clamp(1.125rem,2.2vw,1.625rem)]" />
+      </Reveal>
+
+      <Parallax distance={-16}>
+      <RevealGroup className="mt-[clamp(1.75rem,3.4vw,2.5rem)]">
+        {projects.map((project) => (
+          <RevealItem key={project.title}>
+            <article className="entry group grid gap-x-[clamp(1.5rem,4vw,3.5rem)] gap-y-3 py-[clamp(1.5rem,2.6vw,2rem)] md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+              <div>
+                <h3 className="font-serif text-[clamp(1.25rem,2.2vw,1.5rem)] font-normal leading-snug tracking-[-0.015em] text-fg-hi transition-colors duration-300 group-hover:text-white">
+                  {project.title}
+                </h3>
+              </div>
+              <p className="max-w-[62ch] text-[0.9375rem] leading-[1.75] text-fg-muted">
                 {project.description}
               </p>
             </article>
           </RevealItem>
         ))}
       </RevealGroup>
+      </Parallax>
     </section>
   );
 }

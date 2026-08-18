@@ -1,50 +1,44 @@
 import { Reveal } from "./Reveal";
-
-const stats = [
-  { value: "25+", label: "Researchers" },
-  { value: "10", label: "Time zones" },
-  { value: "30+", label: "Partner orgs / institutions" },
-];
+import { Parallax } from "./Parallax";
 
 export default function AboutSection() {
   return (
     <section
       id="about"
-      className="relative z-10 mx-auto max-w-[1200px] px-[clamp(1.25rem,5vw,3rem)] py-[clamp(3.125rem,8vw,6.875rem)]"
+      className="relative z-10 mx-auto max-w-[1200px] px-[clamp(1.25rem,5vw,3rem)] pb-[clamp(1.75rem,4vw,3rem)] pt-[clamp(0.5rem,2vw,1.5rem)]"
     >
-      <div className="grid items-start gap-[clamp(1.875rem,5vw,4.5rem)] md:grid-cols-2">
+      {/* Same two-column rhythm as the entry rows below: title left, prose
+          right. A single 860px column inside a 1200px container left the
+          right third empty for no reason. */}
+      <Parallax
+        distance={26}
+        className="grid gap-x-[clamp(1.5rem,4vw,3.5rem)] gap-y-4 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]"
+      >
         <div>
-          <Reveal>
-            <p className="section-index mb-5">[ 02 ]&nbsp;About us</p>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <h2 className="font-display text-[clamp(1.625rem,4vw,2.875rem)] font-bold leading-[1.08] tracking-[-0.02em] text-fg-hi">
-              A small lab with an outsized ambition
-            </h2>
-          </Reveal>
-          <Reveal delay={0.16}>
-            <p className="mt-[1.625rem] max-w-[46ch] text-[clamp(0.9375rem,2vw,1.125rem)] leading-[1.65] text-fg-muted text-pretty">
-              We&apos;re a distributed team of researchers and engineers pushing
-              on the hardest questions in computation.
-            </p>
-          </Reveal>
+        <Reveal>
+          <p className="section-index mb-5">About</p>
+        </Reveal>
+        <Reveal delay={0.08}>
+          <h2 className="font-serif text-[clamp(1.875rem,4.4vw,3.125rem)] font-normal leading-[1.1] tracking-[-0.02em] text-fg-hi">
+            Who we are
+          </h2>
+        </Reveal>
         </div>
 
-        <Reveal delay={0.12}>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-            {stats.map((stat) => (
-              <div key={stat.label}>
-                <p className="text-gradient-stat font-display text-[clamp(1.75rem,4.6vw,2.625rem)] font-extrabold tracking-[-0.02em]">
-                  {stat.value}
-                </p>
-                <p className="mt-1.5 font-display text-[0.6875rem] uppercase tracking-[0.14em] text-fg-dim">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
+        <div>
+        {/* The figures read as prose rather than as a row of oversized numbers.
+            A stat strip is one of the more recognisable filler patterns, and
+            these are small enough to just say out loud. */}
+        <Reveal delay={0.16}>
+          <p className="max-w-[58ch] text-[clamp(0.9375rem,2vw,1.0625rem)] leading-[1.7] text-fg-muted md:mt-[2.375rem]">
+            We are a distributed team of researchers and engineers working on
+            the hardest questions in computation. Our team is made up of 25+
+            members, split across 10 time zones, with more than 30 partner
+            organisations and institutions.
+          </p>
         </Reveal>
-      </div>
+        </div>
+      </Parallax>
     </section>
   );
 }
