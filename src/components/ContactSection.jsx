@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Reveal } from "./Reveal";
+import { Parallax } from "./Parallax";
 
 function GitHubIcon({ size = 18 }) {
   return (
@@ -33,18 +34,19 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative z-10 mx-auto max-w-[1200px] px-[clamp(1.25rem,5vw,3rem)] pb-[clamp(2.5rem,6vw,4.375rem)] pt-[clamp(3.125rem,8vw,6.875rem)] text-center"
+      className="relative z-10 mx-auto max-w-[1200px] border-t border-violet-glow/10 px-[clamp(1.25rem,5vw,3rem)] pb-[clamp(2.5rem,5vw,3.75rem)] pt-[clamp(2.75rem,6vw,5rem)] text-center"
     >
+      <Parallax distance={26}>
       <Reveal>
-        <p className="section-index mb-5">[ 05 ]&nbsp;Contact</p>
+        <p className="section-index mb-5">Contact</p>
       </Reveal>
       <Reveal delay={0.08}>
-        <h2 className="mx-auto max-w-[16ch] font-display text-[clamp(1.75rem,4.6vw,3.125rem)] font-bold leading-[1.05] tracking-[-0.02em] text-fg-hi">
-          Let&apos;s talk
+        <h2 className="mx-auto max-w-[16ch] font-serif text-[clamp(1.875rem,4.4vw,3.125rem)] font-normal leading-[1.1] tracking-[-0.02em] text-fg-hi">
+          Get in touch
         </h2>
       </Reveal>
       <Reveal delay={0.16}>
-        <div className="mt-[2.125rem] flex flex-wrap justify-center gap-3">
+        <div className="mt-[1.625rem] flex flex-wrap justify-center gap-3">
           <Link to="/contact/email" className="contact-pill">
             ✉&nbsp;Email
           </Link>
@@ -68,6 +70,7 @@ export default function ContactSection() {
           </a>
         </div>
       </Reveal>
+      </Parallax>
     </section>
   );
 }

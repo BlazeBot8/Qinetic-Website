@@ -73,9 +73,7 @@ export default function Nav({ logoRef, logoHidden = false }) {
 
         {!isMobile && (
           <div className="flex items-center gap-[clamp(0.375rem,1.6vw,1.375rem)]">
-            {navLinks
-              .filter((link) => link.id !== "apply")
-              .map((link) => (
+            {navLinks.map((link) => (
               <a
                 key={link.id}
                 href={`/#${link.id}`}
@@ -83,25 +81,15 @@ export default function Nav({ logoRef, logoHidden = false }) {
                   e.preventDefault();
                   goToSection(link.id);
                 }}
-                className={`font-display text-[0.8125rem] font-medium uppercase tracking-[0.18em] no-underline transition-colors duration-250 px-0.5 py-1.5 ${
+                className={`px-0.5 py-1.5 font-sans text-[0.9375rem] font-medium no-underline transition-colors duration-250 ${
                   activeId === link.id
-                    ? "text-white shadow-[inset_0_-2px_0_#C026D3]"
+                    ? "text-white"
                     : "text-fg-dim hover:text-white"
                 }`}
               >
                 {link.label}
               </a>
             ))}
-            <a
-              href="/#apply"
-              onClick={(e) => {
-                e.preventDefault();
-                goToSection("apply");
-              }}
-              className="btn-nav-join"
-            >
-              Apply
-            </a>
           </div>
         )}
 
@@ -151,23 +139,12 @@ export default function Nav({ logoRef, logoHidden = false }) {
                     e.preventDefault();
                     goToSection(link.id, closeMenu);
                   }}
-                  className="border-b border-violet-glow/10 px-1 py-4 font-display text-[1.625rem] font-bold uppercase tracking-[0.04em] text-fg no-underline"
+                  className="border-b border-violet-glow/10 px-1 py-4 font-serif text-[1.625rem] font-normal text-fg no-underline"
                 >
                   {link.label}
                 </a>
               ))}
             </nav>
-
-            <a
-              href="/#apply"
-              onClick={(e) => {
-                e.preventDefault();
-                goToSection("apply", closeMenu);
-              }}
-              className="btn-primary mt-auto justify-center py-[1.0625rem] text-[0.9375rem] tracking-[0.12em]"
-            >
-              Apply Now
-            </a>
           </motion.div>
         )}
       </AnimatePresence>

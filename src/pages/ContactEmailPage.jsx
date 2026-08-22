@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 import Atmosphere from "../components/Atmosphere";
@@ -10,6 +10,15 @@ import {
   emailjsConfig,
   isEmailJsConfigured,
 } from "../lib/emailjsConfig";
+import {
+  MAX_SENDS,
+  checkQuota,
+  formatRetryAfter,
+  recordSend,
+} from "../lib/spamGuard";
+
+// a form completed faster than this was almost certainly not typed by a person
+const MIN_FILL_MS = 2500;
 
 export default function ContactEmailPage() {
   const [name, setName] = useState("");
@@ -17,6 +26,11 @@ export default function ContactEmailPage() {
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState("");
+  const [quota, setQuota] = useState({ remaining: MAX_SENDS, retryAfterMs: 0 });
+
+  // honeypot: hidden from people, tempting to bots that fill every input
+  const [website, setWebsite] = useState("");
+  const openedAt = useRef(Date.now());
 
   useEffect(() => {
     if (isEmailJsConfigured()) {
@@ -24,9 +38,44 @@ export default function ContactEmailPage() {
     }
   }, []);
 
+  useEffect(() => {
+    let active = true;
+    checkQuota().then((result) => {
+      if (active) setQuota(result);
+    });
+    return () => {
+      active = false;
+    };
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+
+    // Honeypot hit: report success without sending, so the bot has no signal to
+    // adapt to. A person cannot reach this field.
+    if (website.trim() !== "") {
+      setStatus("success");
+      return;
+    }
+
+    if (Date.now() - openedAt.current < MIN_FILL_MS) {
+      setStatus("error");
+      setError("That was quick. Give it a moment and send again.");
+      return;
+    }
+
+    const gate = await checkQuota();
+    setQuota(gate);
+    if (!gate.allowed) {
+      setStatus("error");
+      setError(
+        `You've sent ${MAX_SENDS} messages in the last 24 hours. You can send another in ${formatRetryAfter(
+          gate.retryAfterMs
+        )}.`
+      );
+      return;
+    }
 
     if (!isEmailJsConfigured()) {
       setStatus("error");
@@ -37,20 +86,6 @@ export default function ContactEmailPage() {
     }
 
     setStatus("sending");
-
-    const runtimeConfig = {
-      serviceId: emailjsConfig.serviceId,
-      templateId: emailjsConfig.templateId,
-      publicKey: emailjsConfig.publicKey,
-      envServiceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
-      envTemplateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-      envPublicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
-    };
-
-    if (import.meta.env.DEV) {
-      console.log("[EmailJS] runtime config:", runtimeConfig);
-      window.__emailjsDebug = runtimeConfig;
-    }
 
     try {
       await emailjs.send(
@@ -64,6 +99,8 @@ export default function ContactEmailPage() {
         },
         { publicKey: emailjsConfig.publicKey }
       );
+      await recordSend();
+      setQuota(await checkQuota());
       setStatus("success");
       setName("");
       setSubject("");
@@ -101,7 +138,7 @@ export default function ContactEmailPage() {
           </Link>
 
           <p className="section-index mb-5 mt-8">Contact</p>
-          <h1 className="font-display text-[clamp(1.75rem,4vw,2.5rem)] font-bold tracking-[-0.02em] text-fg-hi">
+          <h1 className="font-serif text-[clamp(1.875rem,4.2vw,2.75rem)] font-normal tracking-[-0.02em] text-fg-hi">
             Send us a message
           </h1>
 
@@ -111,7 +148,7 @@ export default function ContactEmailPage() {
                 Message sent
               </p>
               <p className="mt-3 text-sm text-fg-muted">
-                Thanks for reaching out. We&apos;ll reply as soon as we can.
+                Someone will read it and get back to you.
               </p>
               <Link to="/" className="btn-primary mt-8 inline-flex">
                 Back to home <Arrow />
@@ -122,6 +159,24 @@ export default function ContactEmailPage() {
               onSubmit={handleSubmit}
               className="glass mt-10 space-y-6 rounded-2xl p-8"
             >
+              {/* honeypot — off-screen rather than display:none, which some bots
+                  detect and skip. Never focusable, never announced. */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute left-[-9999px] h-px w-px overflow-hidden opacity-0"
+              >
+                <label htmlFor="website">Website</label>
+                <input
+                  id="website"
+                  name="website"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={website}
+                  onChange={(e) => setWebsite(e.target.value)}
+                />
+              </div>
+
               <div className="form-field">
                 <label htmlFor="name" className="form-label">
                   Name
@@ -178,11 +233,17 @@ export default function ContactEmailPage() {
 
               <button
                 type="submit"
-                className="btn-primary w-full justify-center disabled:cursor-not-allowed disabled:opacity-60"
-                disabled={status === "sending"}
+                className="btn-primary"
+                disabled={status === "sending" || quota.remaining === 0}
               >
                 {status === "sending" ? "Sending…" : "Send message"}
               </button>
+
+              <p className="text-center font-display text-[0.6875rem] uppercase tracking-[0.14em] text-fg-faint">
+                {quota.remaining === 0
+                  ? `Limit reached. Try again in ${formatRetryAfter(quota.retryAfterMs)}`
+                  : `${quota.remaining} of ${MAX_SENDS} messages left today`}
+              </p>
             </form>
           )}
         </div>

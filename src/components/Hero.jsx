@@ -1,54 +1,90 @@
-import { motion } from "framer-motion";
-import { Arrow } from "./Brand";
 import { Reveal } from "./Reveal";
+import { HeroScrub } from "./Parallax";
+import { scrollToSection } from "../lib/scrollToSection";
+import { TARGET_VENUES } from "../data/links";
+import CircuitFigure from "./CircuitFigure";
 
 export default function Hero() {
   return (
     <section
       id="top"
-      className="relative z-10 flex min-h-screen flex-col items-center justify-center px-[clamp(1.25rem,5vw,2.5rem)] pb-[5.625rem] pt-[7.5rem] text-center"
+      className="relative z-10 flex min-h-[80vh] items-center px-[clamp(1.25rem,5vw,4rem)] pb-[clamp(3rem,6vw,4.5rem)] pt-[clamp(6.5rem,13vh,9rem)]"
     >
-      <Reveal>
-        <div className="hero-badge mb-8">
-          <span className="h-[7px] w-[7px] animate-q-pulse rounded-full bg-magenta shadow-[0_0_10px_#C026D3]" />
-          <span className="font-display text-[0.71875rem] uppercase tracking-[0.24em] text-violet-soft">
-            Remote QML research lab
-          </span>
+      <HeroScrub className="w-full">
+        <div className="mx-auto grid w-full max-w-[1200px] items-center gap-x-[clamp(2rem,5vw,4.5rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,0.58fr)]">
+          <div>
+          <Reveal>
+            <p className="hero-eyebrow mb-[clamp(1.25rem,2.4vw,1.75rem)]">
+              Remote QML research lab
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.08}>
+            {/* Serif, sentence case, no letterspacing. Set large, because in
+                the reference layouts the headline is the only thing on screen
+                that is allowed to be big. */}
+            <h1 className="max-w-[20ch] font-serif text-[clamp(2.25rem,5.6vw,4.25rem)] font-normal leading-[1.08] tracking-[-0.02em] text-fg-hi">
+              A remote lab working on quantum machine learning
+            </h1>
+          </Reveal>
+
+          <Reveal delay={0.16}>
+            <p className="mt-[clamp(1.5rem,2.8vw,2rem)] max-w-[56ch] text-[clamp(1rem,2vw,1.125rem)] leading-[1.7] text-fg-muted">
+              Our work sits where quantum information meets machine learning:
+              simulation, noise on real hardware, and the way classical data is
+              encoded into circuits. Whatever we find, the code that produced it
+              goes out alongside it.
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.24}>
+            <div className="mt-[clamp(1.75rem,3.4vw,2.5rem)] border-t border-violet-glow/15 pt-6">
+              <p className="font-display text-[0.6875rem] uppercase tracking-[0.22em] text-fg-dim">
+                Work targeted at
+              </p>
+              <ul className="mt-3.5 flex flex-wrap items-center gap-x-[clamp(1.25rem,3vw,2.5rem)] gap-y-3">
+                {TARGET_VENUES.map((venue) => (
+                  <li key={venue.name}>
+                    <a
+                      href={venue.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[clamp(0.875rem,1.5vw,0.9375rem)] text-fg underline decoration-white/20 underline-offset-[6px] transition-colors hover:text-violet-soft hover:decoration-violet-soft"
+                    >
+                      {venue.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.32}>
+            <div className="mt-[clamp(1.75rem,3.4vw,2.5rem)] flex flex-wrap items-center gap-x-5 gap-y-3">
+              {/* Occupies the slot a CTA would, but points at the section that
+                  explains the closure instead of doing nothing at all. */}
+              <a
+                href="/#apply"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("apply");
+                }}
+                className="btn-closed"
+              >
+                Applications Closed
+              </a>
+              <p className="text-[0.9375rem] text-fg-dim">Check back soon.</p>
+            </div>
+          </Reveal>
+          </div>
+
+          {/* Fills the right half of the fold with figure linework rather than
+              ornament: the ansatz shape the circuit work actually uses. */}
+          <Reveal delay={0.4}>
+            <CircuitFigure className="hidden lg:block" />
+          </Reveal>
         </div>
-      </Reveal>
-
-      <Reveal delay={0.08}>
-        <h1 className="text-gradient mx-auto max-w-[18ch] font-display text-[clamp(2.125rem,6.4vw,5rem)] font-extrabold uppercase leading-[1.02] tracking-[-0.02em] text-balance">
-          Researching at the edge of the quantum frontier
-        </h1>
-      </Reveal>
-
-      <Reveal delay={0.16}>
-        <p className="mx-auto mt-[1.875rem] max-w-[56ch] text-[clamp(1rem,2.2vw,1.25rem)] leading-relaxed text-fg-muted text-pretty">
-          Where quantum information meets machine intelligence. We build the
-          models, methods, and infrastructure for computation&apos;s next era.
-        </p>
-      </Reveal>
-
-      <Reveal delay={0.24}>
-        <div className="mt-[2.625rem] flex justify-center">
-          <a href="#apply" className="btn-primary">
-            Apply Now <Arrow />
-          </a>
-        </div>
-      </Reveal>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.9 }}
-        className="absolute bottom-9 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-fg-faint"
-      >
-        <span className="font-display text-[0.65625rem] uppercase tracking-[0.3em]">
-          Scroll
-        </span>
-        <span className="h-[34px] w-px bg-gradient-to-b from-violet to-transparent" />
-      </motion.div>
+      </HeroScrub>
     </section>
   );
 }
