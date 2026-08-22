@@ -87,20 +87,6 @@ export default function ContactEmailPage() {
 
     setStatus("sending");
 
-    const runtimeConfig = {
-      serviceId: emailjsConfig.serviceId,
-      templateId: emailjsConfig.templateId,
-      publicKey: emailjsConfig.publicKey,
-      envServiceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
-      envTemplateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-      envPublicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
-    };
-
-    if (import.meta.env.DEV) {
-      console.log("[EmailJS] runtime config:", runtimeConfig);
-      window.__emailjsDebug = runtimeConfig;
-    }
-
     try {
       await emailjs.send(
         emailjsConfig.serviceId,
