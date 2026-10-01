@@ -82,7 +82,7 @@ export default function Nav({ logoRef, logoHidden = false }) {
                   goToSection(link.id);
                 }}
                 className={`px-0.5 py-1.5 font-sans text-[0.9375rem] font-medium no-underline transition-colors duration-250 ${
-                  activeId === link.id
+                  activeId === link.id && location.pathname === "/"
                     ? "text-white"
                     : "text-fg-dim hover:text-white"
                 }`}
@@ -90,6 +90,16 @@ export default function Nav({ logoRef, logoHidden = false }) {
                 {link.label}
               </a>
             ))}
+            <Link
+              to="/learn"
+              className={`ml-1 rounded-[2px] border px-3.5 py-1.5 font-sans text-[0.9375rem] font-semibold no-underline transition-colors duration-250 ${
+                location.pathname.startsWith("/learn")
+                  ? "border-violet-soft bg-violet text-white"
+                  : "border-violet-glow/60 bg-violet/35 text-[#d4c2f5] hover:border-violet-soft hover:bg-violet/60 hover:text-white"
+              }`}
+            >
+              Learn
+            </Link>
           </div>
         )}
 
@@ -144,6 +154,13 @@ export default function Nav({ logoRef, logoHidden = false }) {
                   {link.label}
                 </a>
               ))}
+              <Link
+                to="/learn"
+                onClick={closeMenu}
+                className="border-b border-violet-glow/10 px-1 py-4 font-serif text-[1.625rem] font-normal text-violet-soft no-underline"
+              >
+                Learn
+              </Link>
             </nav>
           </motion.div>
         )}

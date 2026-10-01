@@ -33,8 +33,7 @@ export default function AboutSection() {
           <p className="max-w-[58ch] text-[clamp(0.9375rem,2vw,1.0625rem)] leading-[1.7] text-fg-muted md:mt-[2.375rem]">
             We are a distributed team of researchers and engineers working on
             the hardest questions in computation. Our team is made up of 25+
-            members, split across 10 time zones, with more than 30 partner
-            organisations and institutions.
+            members, split across 10 time zones.
           </p>
         </Reveal>
         </div>

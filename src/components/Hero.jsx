@@ -1,8 +1,6 @@
 import { Reveal } from "./Reveal";
 import { HeroScrub } from "./Parallax";
-import { scrollToSection } from "../lib/scrollToSection";
 import { TARGET_VENUES } from "../data/links";
-import CircuitFigure from "./CircuitFigure";
 
 export default function Hero() {
   return (
@@ -28,15 +26,6 @@ export default function Hero() {
             </h1>
           </Reveal>
 
-          <Reveal delay={0.16}>
-            <p className="mt-[clamp(1.5rem,2.8vw,2rem)] max-w-[56ch] text-[clamp(1rem,2vw,1.125rem)] leading-[1.7] text-fg-muted">
-              Our work sits where quantum information meets machine learning:
-              simulation, noise on real hardware, and the way classical data is
-              encoded into circuits. Whatever we find, the code that produced it
-              goes out alongside it.
-            </p>
-          </Reveal>
-
           <Reveal delay={0.24}>
             <div className="mt-[clamp(1.75rem,3.4vw,2.5rem)] border-t border-violet-glow/15 pt-6">
               <p className="font-display text-[0.6875rem] uppercase tracking-[0.22em] text-fg-dim">
@@ -59,30 +48,7 @@ export default function Hero() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.32}>
-            <div className="mt-[clamp(1.75rem,3.4vw,2.5rem)] flex flex-wrap items-center gap-x-5 gap-y-3">
-              {/* Occupies the slot a CTA would, but points at the section that
-                  explains the closure instead of doing nothing at all. */}
-              <a
-                href="/#apply"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("apply");
-                }}
-                className="btn-closed"
-              >
-                Applications Closed
-              </a>
-              <p className="text-[0.9375rem] text-fg-dim">Check back soon.</p>
-            </div>
-          </Reveal>
           </div>
-
-          {/* Fills the right half of the fold with figure linework rather than
-              ornament: the ansatz shape the circuit work actually uses. */}
-          <Reveal delay={0.4}>
-            <CircuitFigure className="hidden lg:block" />
-          </Reveal>
         </div>
       </HeroScrub>
     </section>

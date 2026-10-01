@@ -4,7 +4,6 @@ import Atmosphere from "../components/Atmosphere";
 import { scrollToSection } from "../lib/scrollToSection";
 import Nav from "../components/Nav";
 import Hero from "../components/Hero";
-import WhatSection from "../components/WhatSection";
 import AboutSection from "../components/AboutSection";
 import ResearchSection from "../components/ResearchSection";
 import ApplySection from "../components/ApplySection";
@@ -32,7 +31,6 @@ export default function HomePage() {
       <main className="relative z-10">
         <Hero />
         <AboutSection />
-        <WhatSection />
         <ResearchSection />
         <ApplySection />
         <ContactSection />

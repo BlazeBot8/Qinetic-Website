@@ -1,17 +1,7 @@
-// Cohort status, kept in one place so every surface reads the same thing and
-// there is a single value to change when applications reopen.
+// Applications are rolling — reviewed as they come in, no fixed deadline.
 //
-// The form URL is deliberately deleted rather than hidden behind a flag: while
-// applications are closed, nothing on the site should be able to link to it.
-export const APPLICATIONS_OPEN = false;
-export const CURRENT_COHORT = 2;
-
-// Cohort 1's rate was already published on the site; cohort 2's was supplied
-// when applications closed.
-export const COHORTS = [
-  { number: 1, acceptanceRate: "18%" },
-  { number: 2, acceptanceRate: "21%" },
-];
+// Placeholder until the Google Form link is supplied.
+export const APPLY_FORM_URL = "#";
 
 // Where the lab aims its work, same list as the "Top-Tier or Nothing" card.
 // Each links to the journal's own page; "IEEE" is unqualified on the site, so
