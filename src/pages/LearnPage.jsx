@@ -27,8 +27,8 @@ export default function LearnPage() {
   return (
     <LearnLayout>
       <PageTitle eyebrow="Learn" title={COURSE_NAME}>
-        Five modules. Each has a video, a short reading, and a ten-question
-        quiz. Pass a quiz to earn its badge. Earn all five, pass the final
+        Five modules. Each has video lessons, a short reading, and a
+        ten-question quiz. Pass a quiz to earn its badge. Earn all five, pass the final
         assessment, and you receive a certificate.
       </PageTitle>
 
