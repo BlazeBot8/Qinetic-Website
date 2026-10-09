@@ -22,7 +22,6 @@ export default function ApplySection() {
 
           <Reveal delay={0.16}>
             <p className="mt-[1.125rem] text-[clamp(0.9375rem,2vw,1.0625rem)] leading-[1.7] text-fg-muted">
-              We review applications as they come in, with no fixed deadline.{" "}
               <a
                 href={APPLY_FORM_URL}
                 target="_blank"

@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  /* Serif for headings, grotesk for reading, mono kept only for the small
-     uppercase labels. Every reference site pairs a display serif with a plain
-     sans; a monospace headline reads as a terminal, not as a masthead. */
-  --font-serif: "Source Serif 4", "Iowan Old Style", Georgia, serif;
-  --font-display: "JetBrains Mono", ui-monospace, monospace;
-  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  /* One typeface site-wide: DM Sans. The serif and display names stay as
+     aliases so existing classes (font-serif, font-display) keep working and
+     all resolve to the same family. */
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: var(--font-sans);
+  --font-display: var(--font-sans);
 
   /* Ground lifted off pure black and the violet pulled down out of neon.
      Saturated violet on #08080a was the clash: max-chroma accent against
@@ -83,8 +83,12 @@
   }
 
   h1, h2, h3, h4 {
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
     letter-spacing: -0.015em;
+  }
+
+  button, input, textarea, select {
+    font-family: inherit;
   }
 
   ::selection {

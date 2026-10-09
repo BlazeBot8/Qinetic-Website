@@ -4,7 +4,7 @@ import Badge from "../components/Badge";
 import SignInCard from "../components/SignInCard";
 import { useAuth } from "../lib/auth";
 import { useProgress } from "../hooks/useProgress";
-import { COURSE_NAME, MODULES } from "../data/learnContent";
+import { MODULES } from "../data/learnContent";
 
 function StatusLabel({ children, tone }) {
   return (
@@ -26,10 +26,8 @@ export default function LearnPage() {
 
   return (
     <LearnLayout>
-      <PageTitle eyebrow="Learn" title={COURSE_NAME}>
-        Five modules. Each has video lessons, a short reading, and a
-        ten-question quiz. Pass a quiz to earn its badge. Earn all five, pass the final
-        assessment, and you receive a certificate.
+      <PageTitle eyebrow="Learn" title="Qinetic Learn">
+        Anyone can learn.
       </PageTitle>
 
       {!loading && !user && (
